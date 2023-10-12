@@ -1,0 +1,195 @@
+     1. Movie should have multiple media(Video or Image)                       
+
+
+
+CREATE TABLE MOVIE (
+ Id INTEGER NOT NULL,
+ Moviename TEXT NOT NULL,
+  Artistname TEXT NOT NULL,
+  Year INTEGER NOT NULL,
+  Language TEXT NOT NULL
+);
+
+CREATE TABLE MOVIERATINGS (
+  Id INTEGER NOT NULL,
+  MovieId INTEGER NOT NULL,
+  Country TEXT NOT NULL,
+Stars INTEGER NOT NULL,
+StarRatings INTEGER NOT NULL,
+Video TEXT NOT NULL
+);
+
+-- insert
+INSERT INTO MOVIE VALUES (101, 'Comalimovie', 'Jeyamravi',2019,'Tamil....');
+INSERT INTO MOVIE VALUES (102, 'Ratchasan',  'Vishnuvishal',2018,'Tamil...');
+INSERT INTO MOVIE VALUES (103, 'Prey Devil', 'ChristianNav',2022,'English...');
+INSERT INTO MOVIE VALUES (104, 'PonniyinSelvan','Vikram-ravi',   2022,'Tamil...');
+INSERT INTO MOVIE VALUES (105, 'Infinite Storm', 'NaomiWatts',2022,'English....');
+
+
+INSERT INTO MOVIERATINGS VALUES (1,101,'India', 8.50, 524810,'OOT');
+INSERT INTO MOVIERATINGS VALUES (2,101,'India', 8.50, 524810,'Theater');
+INSERT INTO MOVIERATINGS VALUES (3,105,'America', 10,7852364 ,'OOT');
+INSERT INTO MOVIERATINGS VALUES (4,104,'India', 10,965842,'HOTSTAR' );
+
+-- -- fetch 
+SELECT * FROM MOVIE LEFT JOIN MOVIERATINGS ON MOVIE.Id = MOVIERATINGS.MovieId;
+
+
+Output:
+
+Id	Moviename	Artistname	Year	Language	Id	MovieId	Country	Stars	StarRatings	Video
+101	Comalimovie	Jeyamravi	2019	Tamil....	2	101	India	9	524810	        Theater
+101	Comalimovie	Jeyamravi	2019	Tamil....	1	101	India	9	524810	        OOT
+102	Ratchasan	Vishnuvishal	2018	Tamil...	NULL	NULL	NULL	NULL	NULL	        NULL
+103	Prey Devil	ChristianNav	2022	English...	NULL	NULL	NULL	NULL	NULL	        NULL
+104	PonniyinSelvan	Vikram-ravi	2022	Tamil...	4	104	India	10	965842	        HOTSTAR
+105	Infinite Storm	NaomiWatts	2022	English....	3	105	America	10	7852364  	OOT
+
+
+
+                                                    2. Movie can belongs to multiple Genre
+
+CREATE TABLE GENERE (
+ Id INTEGER PRIMARY KEY,
+ Moviename TEXT NOT NULL,
+  Artistname TEXT NOT NULL,
+  Yeat INTEGER NOT NULL,
+  Geners TEXT NOT NULL
+);
+
+INSERT INTO GENERE VALUES (0001, 'Comalimovie', 'Jeyamravi',2019,'Comedy');
+INSERT INTO GENERE VALUES (0002, 'Ratchasan',  'Vishnuvishal',2018,'Thriller');
+INSERT INTO GENERE VALUES (0003, 'Prey Devil', 'ChristianNav',2022,'Horror');
+INSERT INTO GENERE VALUES (0004, 'PonniyinSelvan','Vikram-ravi',   2022,'Historical');
+INSERT INTO GENERE VALUES (0005, 'Infinite Storm', 'NaomiWatts',2022,'Adventure');
+
+-- fetch 
+SELECT * FROM GENERE;
+
+
+
+
+Output:
+
+Id	Moviename	Artistname	Yeat	Geners
+1	Comalimovie	Jeyamravi	2019	Comedy
+2	Ratchasan	Vishnuvishal	2018	Thriller
+3	Prey Devil	ChristianNav	2022	Horror
+4	PonniyinSelvan	Vikram-ravi	2022	Historical
+5	Infinite Storm	NaomiWatts	2022	Adventure
+
+
+                                      3. Movie can have multiple reviews and Review can belongs to a user
+
+CREATE TABLE MOVIE (
+ Id INTEGER NOT NULL,
+ Moviename TEXT NOT NULL,
+  Artistname TEXT NOT NULL,
+  Year INTEGER NOT NULL,
+  Language TEXT NOT NULL
+);
+
+CREATE TABLE MOVIERATINGS (
+  Id INTEGER NOT NULL,
+  MovieId INTEGER NOT NULL,
+  Country TEXT NOT NULL,
+Stars INTEGER NOT NULL,
+StarRatings INTEGER NOT NULL
+);
+
+-- insert
+INSERT INTO MOVIE VALUES (101, 'Comalimovie', 'Jeyamravi',2019,'Tamil....');
+INSERT INTO MOVIE VALUES (102, 'Ratchasan',  'Vishnuvishal',2018,'Tamil...');
+INSERT INTO MOVIE VALUES (103, 'Prey Devil', 'ChristianNav',2022,'English...');
+INSERT INTO MOVIE VALUES (104, 'PonniyinSelvan','Vikram-ravi',   2022,'Tamil...');
+INSERT INTO MOVIE VALUES (105, 'Infinite Storm', 'NaomiWatts',2022,'English....');
+
+
+INSERT INTO MOVIERATINGS VALUES (1,101,'India', 8.50, 524810);
+INSERT INTO MOVIERATINGS VALUES (1,105,'America', 10,7852364 );
+INSERT INTO MOVIERATINGS VALUES (1,104,'India', 10,965842 );
+
+-- -- fetch 
+SELECT * FROM MOVIE LEFT JOIN MOVIERATINGS ON MOVIE.Id = MOVIERATINGS.MovieId;
+
+Output:
+
+Id	Moviename	Artistname	Year	Language	Id	MovieId	Country	Stars	StarRatings
+101	Comalimovie	Jeyamravi	2019	Tamil....	1	101	India	9	524810
+102	Ratchasan	Vishnuvishal	2018	Tamil...	NULL	NULL	NULL	NULL	NULL
+103	Prey Devil	ChristianNav	2022	English...	NULL	NULL	NULL	NULL	NULL
+104	PonniyinSelvan	Vikram-ravi	2022	Tamil...	1	104	India	10	965842
+105	Infinite Storm	NaomiWatts	2022	English....	1	105	America	10	7852364
+
+
+
+
+
+                               4. Artist can have multiple skills 
+
+
+CREATE TABLE ARTIST (
+ Id INTEGER PRIMARY KEY,
+
+  Name TEXT NOT NULL,
+  Age INTEGER NOT NULL,
+  MultiSkill TEXT NOT NULL
+);
+
+
+-- insert
+INSERT INTO ARTIST VALUES (0001, 'Sudha', 58, 'Actor and Dancer');
+INSERT INTO ARTIST VALUES (0002, 'Ajith', 45, 'Actor and Bike Racer');
+INSERT INTO ARTIST VALUES (0003, 'Dhanush', 35, 'Actor ,Singer and Writer');
+
+
+-- fetch 
+SELECT * FROM ARTIST;
+
+
+
+Output:
+
+Id	Name	Age	MultiSkill
+1	Sudha	58	Actor and Dancer
+2	Ajith	45	Actor and Bike Racer
+3	Dhanush	35	Actor ,Singer and Writer
+
+
+
+                                                    5. Artist can perform multiple role in a single film
+
+
+
+CREATE TABLE ARTIST (
+ Id INTEGER PRIMARY KEY,
+  ArtistName TEXT NOT NULL,
+  MovieName TEXT NOT NULL,
+ 
+  Year INTEGER NOT NULL,
+  Language TEXT NOT NULL,
+  MultipleRole TEXT NOT NULL
+);
+
+
+-- insert
+INSERT INTO ARTIST VALUES (0001, 'Kamalhasan','Dasavathaaram', 2008, 'Tamil........', '10 Characters');
+INSERT INTO ARTIST VALUES (0002, 'Eddie Murphy','NuttyProfessor', 2000, 'English....', '7 Characters');
+
+-- fetch 
+SELECT * FROM ARTIST;
+
+
+
+Output:
+
+Id	ArtistName	MovieName	Year	Language	MultipleRole
+1	Kamalhasan	Dasavathaaram	2008	Tamil........	10 Characters
+2	Eddie Murphy	NuttyProfessor	2000	English....	7 Characters
+
+
+
+
+
+
